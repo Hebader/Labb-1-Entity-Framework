@@ -1,0 +1,45 @@
+﻿@model List<LeaveApplication>
+
+<form method="get" asp-action="EmployeeLeaveApplications" asp-controller="LeaveApplications">
+    <label for="employeeName">Select Employee:</label>
+    <select id="employeeName" name="employeeName">
+        <option value="">Select an Employee</option>
+        @foreach (var item in ViewBag.EmployeeNames)
+        {
+            <option value="@item.EmployeeName">@item.EmployeeName</option>
+        }
+    </select>
+
+    <button type="submit">Search</button>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <h2>Leave Applications for selected Employee</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Leave Type</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var application in Model)
+            {
+                <tr>
+                    <td>@application.StartDate.ToShortDateString()</td>
+                    <td>@application.EndDate.ToShortDateString()</td>
+                    <td>@application.LeaveType.LeaveTypeName</td>
+                    <!-- Add more columns as needed -->
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No leave applications found for selected Employee.</p>
+}
