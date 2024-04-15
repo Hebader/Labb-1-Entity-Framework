@@ -72,12 +72,14 @@ namespace Labb_1___Entity_Framework.Controllers
             }
 
             // Skicka data till vyn för att visa resultatet
+            ViewData["SelectedMonth"] = selectedMonth;
             ViewData["Month"] = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(selectedMonth); // Konvertera månadsnummer till namn
             ViewData["Year"] = currentYear;
             ViewData["LeaveDaysPerEmployee"] = leaveDaysPerEmployee;
 
             return View(monthlyApplications);
         }
+
 
 
 
